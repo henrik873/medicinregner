@@ -143,6 +143,15 @@
             margin: 0;
         }
 
+        .install-instructions ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .install-instructions li + li {
+            margin-top: 6px;
+        }
+
         .install-now-button {
             min-height: 40px;
             margin-top: 10px;
@@ -424,13 +433,26 @@
             <div class="install-instructions" id="installInstructions" aria-live="polite">
                 <p id="installPlaceholder">Vælg din enhed ovenfor for at se instruktionerne.</p>
                 <div data-instructions="pc" hidden>
-                    <p>Åbn siden i Chrome eller Edge. Vælg installationsikonet i adresselinjen, eller åbn browsermenuen og vælg <strong>Installér app</strong>.</p>
+                    <ul>
+                        <li>Åbn siden i Chrome eller Edge.</li>
+                        <li>Vælg installationsikonet i adresselinjen, eller åbn browsermenuen.</li>
+                        <li>Vælg <strong>Installér app</strong>.</li>
+                    </ul>
                 </div>
                 <div data-instructions="iphone" hidden>
-                    <p>Åbn siden i Safari, tryk på <strong>Del</strong>, vælg <strong>Føj til hjemmeskærm</strong>, og tryk på <strong>Tilføj</strong>. Hvis siden er åbnet i Messenger, åbn den først i Safari.</p>
+                    <ul>
+                        <li>Åbn siden i Safari. Hvis den er åbnet i Messenger, vælg først at åbne den i Safari.</li>
+                        <li>Tryk på <strong>Del</strong>.</li>
+                        <li>Vælg <strong>Føj til hjemmeskærm</strong>.</li>
+                        <li>Tryk på <strong>Tilføj</strong>.</li>
+                    </ul>
                 </div>
                 <div data-instructions="android" hidden>
-                    <p>Åbn siden i Chrome, og vælg <strong>Installér app</strong>. Hvis valget ikke vises, åbn menuen ⋮ og vælg <strong>Installér app</strong> eller <strong>Føj til startskærm</strong>.</p>
+                    <ul>
+                        <li>Åbn siden i Chrome.</li>
+                        <li>Vælg <strong>Installér app</strong>, hvis muligheden vises.</li>
+                        <li>Hvis ikke, åbn menuen ⋮ og vælg <strong>Installér app</strong> eller <strong>Føj til startskærm</strong>.</li>
+                    </ul>
                 </div>
             </div>
             <button class="install-now-button" id="installNowButton" type="button" hidden>Installér nu</button>
