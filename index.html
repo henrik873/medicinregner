@@ -250,7 +250,7 @@
         }
 
         .disclaimer {
-            margin-top: 16px;
+            margin: -10px 0 20px;
             padding: 12px 14px;
             color: #d7d0bc;
             background: rgba(224, 172, 58, 0.08);
@@ -336,6 +336,10 @@
         <span>Karin´s Medicinberegner</span>
     </h1>
 
+    <aside class="disclaimer" role="note">
+        <strong>Vigtigt om sikkerhed:</strong> Beregningen er kun et hjælpemiddel og må ikke stå alene. Kontrollér altid ordination, præparatets koncentration, enheder og resultat. Følg arbejdsstedets instrukser for kontrol, og spørg en kollega eller vejleder ved tvivl.
+    </aside>
+
     <label for="dosis">Ordineret dosis (mg)</label>
     <input type="number" id="dosis" inputmode="decimal" step="any" placeholder="fx 12">
 
@@ -358,10 +362,6 @@
         <div class="ml" id="resultat">- ml</div>
         <p id="regnestykke"></p>
     </div>
-
-    <aside class="disclaimer" role="note">
-        <strong>Vigtigt om sikkerhed:</strong> Beregningen er kun et hjælpemiddel og må ikke stå alene. Kontrollér altid ordination, præparatets koncentration, enheder og resultat. Følg arbejdsstedets instrukser for kontrol, og spørg en kollega eller vejleder ved tvivl.
-    </aside>
 
     <a class="fagligt-link" href="./faglige-emner.html">
         <span class="fagligt-link-text">
