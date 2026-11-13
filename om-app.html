@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Om app · Karin´s MedicinBeregner</title>
+    <meta name="theme-color" content="#007aff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Medicin">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192-v2.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-v2.png">
+
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100svh;
+            margin: 0;
+            padding:
+                max(20px, env(safe-area-inset-top))
+                max(18px, env(safe-area-inset-right))
+                max(20px, env(safe-area-inset-bottom))
+                max(18px, env(safe-area-inset-left));
+            display: grid;
+            place-items: center;
+            font-family: Arial, sans-serif;
+            color: #e8eef8;
+            background:
+                radial-gradient(ellipse at top, rgba(0, 122, 255, 0.18), transparent 55%),
+                #080d16;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        main {
+            width: min(100%, 620px);
+            padding: clamp(24px, 6vw, 36px);
+            background: linear-gradient(160deg, #151f30, #0d1420 72%);
+            border: 1px solid rgba(176, 199, 230, 0.14);
+            border-radius: 26px;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 22px;
+            color: #9dcaff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #d3e8ff;
+        }
+
+        .back-link:focus-visible {
+            outline: 3px solid #b6d7ff;
+            outline-offset: 4px;
+            border-radius: 3px;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            color: #78b7ff;
+            font-size: clamp(1.8rem, 7vw, 2.3rem);
+            line-height: 1.2;
+        }
+
+        h1 small {
+            color: #91a2b9;
+            font-size: 0.48em;
+            font-weight: normal;
+            vertical-align: middle;
+        }
+
+        h2 {
+            margin: 0 0 12px;
+            color: #8dc4ff;
+            font-size: 1.2rem;
+            line-height: 1.35;
+        }
+
+        .section-card {
+            padding: 18px;
+            background: rgba(5, 11, 20, 0.58);
+            border: 1px solid rgba(176, 199, 230, 0.13);
+            border-radius: 16px;
+        }
+
+        .section-card + .section-card {
+            margin-top: 16px;
+        }
+
+        .section-card p,
+        .section-card li {
+            color: #d0dbea;
+            line-height: 1.55;
+        }
+
+        .section-card p {
+            margin: 0;
+        }
+
+        .section-card ul {
+            margin: 0;
+            padding-left: 21px;
+        }
+
+        .section-card li + li {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <a class="back-link" href="./index.html">← Tilbage til beregneren</a>
+        <h1>Om app <small>v1.0.0</small></h1>
+
+        <section class="section-card" aria-labelledby="changes-heading">
+            <h2 id="changes-heading">Seneste ændringer</h2>
+            <ul>
+                <li>Overskriften er ændret til Karin´s MedicinBeregner, farvet blå og har nu kanylen over sig.</li>
+                <li>Versionsnummeret vises ved overskriften.</li>
+                <li>Koncentrationen er tydeligt angivet i mg/ml.</li>
+                <li>Installationsvejledning til PC, iPhone og Android samt en synlig sikkerhedsdisclaimer.</li>
+            </ul>
+        </section>
+
+        <section class="section-card" aria-labelledby="notifications-heading">
+            <h2 id="notifications-heading">Email om nye versioner</h2>
+            <p>Email-tilmelding er ikke aktiveret endnu. Den kommer, når der er valgt en løsning, som kan gemme tilmeldinger og håndtere udsendelser.</p>
+        </section>
+    </main>
+</body>
+</html>

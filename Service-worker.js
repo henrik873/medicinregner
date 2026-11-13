@@ -1,8 +1,9 @@
-const CACHE_NAME = "medicinregner-v21";
+const CACHE_NAME = "medicinregner-v22";
 
 const FILES_TO_CACHE = [
     "./",
     "./index.html",
+    "./om-app.html",
     "./faglige-emner.html",
     "./manifest.json",
     "./apple-touch-icon-v2.png",
