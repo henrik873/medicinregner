@@ -187,6 +187,47 @@
             font-size: 14px;
         }
 
+        .fagligt-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 16px;
+            padding: 15px 16px;
+            color: #e8eef8;
+            text-decoration: none;
+            background: rgba(22, 119, 232, 0.1);
+            border: 1px solid rgba(112, 181, 255, 0.28);
+            border-radius: 14px;
+            transition: background-color 160ms ease, border-color 160ms ease;
+        }
+
+        .fagligt-link:hover {
+            background: rgba(22, 119, 232, 0.18);
+            border-color: rgba(112, 181, 255, 0.55);
+        }
+
+        .fagligt-link:focus-visible {
+            outline: 3px solid #b6d7ff;
+            outline-offset: 3px;
+        }
+
+        .fagligt-link-text {
+            display: grid;
+            gap: 4px;
+        }
+
+        .fagligt-link small {
+            color: #a9bad0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .fagligt-link-pil {
+            color: #70b5ff;
+            font-size: 24px;
+        }
+
         @media (max-width: 360px) {
             .app {
                 padding: 24px 20px;
@@ -227,6 +268,14 @@
         <div class="ml" id="resultat">- ml</div>
         <p id="regnestykke"></p>
     </div>
+
+    <a class="fagligt-link" href="./faglige-emner.html">
+        <span class="fagligt-link-text">
+            <strong>Faglige emner</strong>
+            <small>Hygiejne, observationer og kommunikation</small>
+        </span>
+        <span class="fagligt-link-pil" aria-hidden="true">→</span>
+    </a>
 
 </main>
 

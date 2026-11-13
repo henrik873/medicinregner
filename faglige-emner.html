@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Faglige emner · Karin´s Medicinberegner</title>
+    <meta name="theme-color" content="#007aff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MedicinRegner">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192-v2.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-v2.png">
+
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100svh;
+            margin: 0;
+            padding:
+                max(20px, env(safe-area-inset-top))
+                max(18px, env(safe-area-inset-right))
+                max(20px, env(safe-area-inset-bottom))
+                max(18px, env(safe-area-inset-left));
+            display: grid;
+            place-items: center;
+            font-family: Arial, sans-serif;
+            color: #e8eef8;
+            background:
+                radial-gradient(ellipse at top, rgba(0, 122, 255, 0.18), transparent 55%),
+                #080d16;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .app {
+            width: min(100%, 620px);
+            padding: clamp(24px, 6vw, 36px);
+            background: linear-gradient(160deg, #151f30, #0d1420 72%);
+            border: 1px solid rgba(176, 199, 230, 0.14);
+            border-radius: 26px;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        .tilbage {
+            display: inline-block;
+            margin-bottom: 22px;
+            color: #9dcaff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .tilbage:hover {
+            color: #d3e8ff;
+        }
+
+        .tilbage:focus-visible {
+            outline: 3px solid #b6d7ff;
+            outline-offset: 4px;
+            border-radius: 3px;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            color: #f3f7ff;
+            font-size: clamp(1.8rem, 7vw, 2.3rem);
+            line-height: 1.2;
+        }
+
+        .intro {
+            margin: 0 0 24px;
+            color: #b6c4d7;
+            line-height: 1.55;
+        }
+
+        .emner {
+            display: grid;
+            gap: 14px;
+        }
+
+        .emne {
+            padding: 18px;
+            background: rgba(5, 11, 20, 0.58);
+            border: 1px solid rgba(176, 199, 230, 0.13);
+            border-radius: 16px;
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            color: #8dc4ff;
+            font-size: 1.15rem;
+            line-height: 1.35;
+        }
+
+        .emne p,
+        .emne li {
+            color: #d0dbea;
+            line-height: 1.55;
+        }
+
+        .emne p {
+            margin: 0;
+        }
+
+        .emne ul {
+            margin: 10px 0 0;
+            padding-left: 21px;
+        }
+
+        .emne li + li {
+            margin-top: 7px;
+        }
+
+        .vigtigt {
+            margin: 18px 0 0;
+            padding: 14px 16px;
+            color: #d5e0ee;
+            background: rgba(22, 119, 232, 0.1);
+            border-left: 3px solid #58a6ff;
+            border-radius: 8px;
+            line-height: 1.55;
+        }
+
+        @media (max-width: 360px) {
+            .app {
+                padding: 24px 20px;
+            }
+
+            .emne {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<main class="app">
+    <a class="tilbage" href="./">← Tilbage til beregneren</a>
+    <h1>Faglige emner</h1>
+    <p class="intro">Korte huskepunkter til social- og sundhedsassistentens hverdag.</p>
+
+    <div class="emner">
+        <section class="emne" aria-labelledby="hygiejne">
+            <h2 id="hygiejne">Hygiejne og smitteforebyggelse</h2>
+            <ul>
+                <li>Udfør håndhygiejne på de relevante tidspunkter før og efter kontakt med borgeren eller omgivelserne, efter lokale retningslinjer.</li>
+                <li>Brug handsker og andre værnemidler efter opgaven og arbejdspladsens instrukser. Handsker erstatter ikke håndhygiejne.</li>
+                <li>Hold rent og urent udstyr adskilt, og rengør udstyr efter de gældende instrukser.</li>
+            </ul>
+        </section>
+
+        <section class="emne" aria-labelledby="observationer">
+            <h2 id="observationer">Observationer og vitale værdier</h2>
+            <ul>
+                <li>Vær opmærksom på ændringer fra borgerens sædvanlige tilstand, for eksempel vågenhed, vejrtrækning, hudfarve, bevægelse og trivsel.</li>
+                <li>Mål kun værdier efter oplæring og instruktion, med korrekt udstyr og inden for din rolle og kompetence.</li>
+                <li>Beskriv dine observationer konkret, og giv hurtigt besked om bekymrende ændringer efter arbejdspladsens procedure. Stil ikke selv en diagnose.</li>
+            </ul>
+        </section>
+
+        <section class="emne" aria-labelledby="kommunikation">
+            <h2 id="kommunikation">Kommunikation og etik</h2>
+            <ul>
+                <li>Præsenter dig, lyt aktivt, og tal i et sprog, borgeren kan forstå. Vis respekt for borgerens ønsker og værdighed.</li>
+                <li>Beskyt personlige oplysninger, og del kun relevante oplysninger med de rette fagpersoner gennem godkendte kanaler.</li>
+                <li>Dokumentér sagligt, respektfuldt og rettidigt efter arbejdspladsens retningslinjer.</li>
+            </ul>
+        </section>
+    </div>
+
+    <p class="vigtigt"><strong>Husk:</strong> Indholdet er generel læring og erstatter ikke lokale instrukser, faglig vejledning eller en konkret vurdering. Ved bekymring for en borgers tilstand skal du følge arbejdspladsens procedure og kontakte den ansvarlige sundhedsfaglige kollega.</p>
+</main>
+</body>
+</html>
