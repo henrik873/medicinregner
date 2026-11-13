@@ -1,9 +1,13 @@
 {
-    "name": "MedicinRegner",
+    "id": "./",
+    "name": "Karin´s Medicinberegner",
     "short_name": "Medicin",
     "description": "Beregn volumen ud fra ordineret dosis og koncentration i mg/ml",
+    "lang": "da",
     "start_url": "./",
+    "scope": "./",
     "display": "standalone",
+    "orientation": "portrait",
     "background_color": "#080d16",
     "theme_color": "#007aff",
     "icons": [

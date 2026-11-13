@@ -11,7 +11,7 @@
 
     <meta name="theme-color" content="#007aff">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="MedicinRegner">
+    <meta name="apple-mobile-web-app-title" content="Medicin">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <style>
@@ -64,6 +64,53 @@
             height: 1.35em;
             margin-right: 5px;
             vertical-align: -0.2em;
+        }
+
+        .installation {
+            margin: 0 0 18px;
+        }
+
+        .install-button {
+            width: 100%;
+            min-height: 48px;
+            color: #fff;
+            background: #1677e8;
+        }
+
+        .install-button:hover {
+            background: #2788f5;
+        }
+
+        .install-button[hidden] {
+            display: none;
+        }
+
+        .install-guide {
+            margin-top: 8px;
+            color: #d6e0ef;
+            font-size: 14px;
+        }
+
+        .install-guide summary {
+            padding: 8px 0;
+            color: #b6c4d7;
+            cursor: pointer;
+        }
+
+        .install-guide-content {
+            padding: 12px;
+            background: rgba(5, 11, 20, 0.6);
+            border: 1px solid rgba(176, 199, 230, 0.12);
+            border-radius: 12px;
+            line-height: 1.45;
+        }
+
+        .install-guide-content p {
+            margin: 0 0 10px;
+        }
+
+        .install-guide-content p:last-child {
+            margin-bottom: 0;
         }
 
         label {
@@ -266,6 +313,19 @@
         <span>Karin´s Medicinberegner</span>
     </h1>
 
+    <div class="installation">
+        <button class="install-button" id="installButton" type="button">Installér appen</button>
+        <details class="install-guide" id="installGuide">
+            <summary>Installér manuelt eller på iPhone/iPad</summary>
+            <div class="install-guide-content">
+                <p><strong>iPhone/iPad:</strong> Åbn siden i Safari, tryk på Del-knappen, vælg <em>Føj til hjemmeskærm</em>, og tryk på Tilføj.</p>
+                <p><strong>Android:</strong> Åbn siden i Chrome, og vælg <em>Installér appen</em>. Hvis valget ikke vises, åbn menuen ⋮ og vælg <em>Installér app</em> eller <em>Føj til startskærm</em>.</p>
+                <p><strong>Computer:</strong> Brug installationsikonet i adresselinjen eller vælg <em>Installér</em> i browsermenuen.</p>
+                <p>Hvis siden åbnes i Messenger, skal du først vælge at åbne den i Safari eller Chrome.</p>
+            </div>
+        </details>
+    </div>
+
     <label for="dosis">Ordineret dosis (mg)</label>
     <input type="number" id="dosis" inputmode="decimal" step="any" placeholder="fx 12">
 
@@ -357,6 +417,49 @@ function nulstil() {
     document.getElementById("regnestykke").innerText = "";
     document.getElementById("dosis").focus();
 }
+
+const installButton = document.getElementById("installButton");
+const installGuide = document.getElementById("installGuide");
+let deferredInstallPrompt = null;
+
+if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true) {
+    installButton.hidden = true;
+}
+
+window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+});
+
+installButton.addEventListener("click", async () => {
+    if (!deferredInstallPrompt) {
+        installGuide.open = true;
+        installGuide.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        installGuide.querySelector("summary").focus();
+        return;
+    }
+
+    const installPrompt = deferredInstallPrompt;
+    deferredInstallPrompt = null;
+
+    try {
+        await installPrompt.prompt();
+        const { outcome } = await installPrompt.userChoice;
+        if (outcome === "accepted") {
+            installButton.hidden = true;
+        } else {
+            installGuide.open = true;
+        }
+    } catch (error) {
+        console.error("Installationsprompten kunne ikke åbnes:", error);
+        installGuide.open = true;
+    }
+});
+
+window.addEventListener("appinstalled", () => {
+    deferredInstallPrompt = null;
+    installButton.hidden = true;
+});
 
 </script>
 
