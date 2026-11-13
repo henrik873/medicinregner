@@ -1,4 +1,4 @@
-const CACHE_NAME = "medicinregner-v15";
+const CACHE_NAME = "medicinregner-v16";
 
 const FILES_TO_CACHE = [
     "./",
