@@ -1,12 +1,12 @@
-const CACHE_NAME = "medicinregner-v3";
+const CACHE_NAME = "medicinregner-v4";
 
 const FILES_TO_CACHE = [
     "./",
     "./index.html",
     "./manifest.json",
-    "./apple-touch-icon.png",
-    "./icon-192.png",
-    "./icon-512.png"
+    "./apple-touch-icon-v2.png",
+    "./icon-192-v2.png",
+    "./icon-512-v2.png"
 ];
 
 self.addEventListener("install", event => {
