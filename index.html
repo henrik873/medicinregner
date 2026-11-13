@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <title>Karin´s MedicinRegner</title>
+    <title>Karin´s MedicinBeregner</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192-v2.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-v2.png">
@@ -51,22 +51,28 @@
             box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
         }
 
+        .app-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
         h1 {
             display: flex;
             align-items: center;
             justify-content: center;
             white-space: nowrap;
-            margin: 0 0 30px;
+            margin: 0;
             color: #f3f7ff;
             font-size: clamp(0.94rem, 4.7vw, 1.5rem);
             line-height: 1.2;
         }
 
         .syringe-icon {
-            width: 1.4em;
-            height: 1.05em;
-            flex: 0 0 auto;
-            margin-right: 5px;
+            width: 52px;
+            height: 39px;
+            margin-bottom: 4px;
         }
 
         .version-number {
@@ -381,7 +387,7 @@
 
 <main class="app">
 
-    <h1>
+    <header class="app-header">
         <svg class="syringe-icon" viewBox="0 0 64 48" aria-hidden="true">
             <path d="M7 16v16M10 24h5" fill="none" stroke="#78b7ff" stroke-linecap="round" stroke-width="2.5"/>
             <rect x="15" y="17" width="23" height="14" rx="3" fill="#eaf4ff" stroke="#78b7ff" stroke-width="1.5"/>
@@ -393,9 +399,11 @@
             <path d="M62 26c-.9 1.3-1.4 2.2-1.4 3a1.4 1.4 0 1 0 2.8 0c0-.8-.5-1.7-1.4-3Z" fill="#7dd3fc"/>
             <circle cx="56" cy="31" r="1.3" fill="#7dd3fc"/>
         </svg>
-        <span>Medicinberegning SSA</span>
-        <small class="version-number">v1.0.0</small>
-    </h1>
+        <h1>
+            <span>Karin´s MedicinBeregner</span>
+            <small class="version-number">v1.0.0</small>
+        </h1>
+    </header>
 
     <aside class="disclaimer" role="note">
         <strong>Vigtigt om sikkerhed:</strong> Beregningen er kun et hjælpemiddel og må ikke stå alene. Kontrollér altid ordination, præparatets koncentration, enheder og resultat. Følg arbejdsstedets instrukser for kontrol, og spørg en kollega eller vejleder ved tvivl.
