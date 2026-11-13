@@ -67,18 +67,26 @@
         }
 
         .installation {
-            margin: 0 0 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 18px 0 0;
         }
 
         .install-button {
-            width: 100%;
-            min-height: 48px;
-            color: #fff;
-            background: #1677e8;
+            min-height: 36px;
+            padding: 7px 11px;
+            color: #a9bad0;
+            background: rgba(38, 52, 73, 0.55);
+            border: 1px solid rgba(176, 199, 230, 0.14);
+            font-size: 13px;
+            font-weight: normal;
+            opacity: 0.82;
         }
 
         .install-button:hover {
-            background: #2788f5;
+            background: #263449;
+            opacity: 1;
         }
 
         .install-button[hidden] {
@@ -313,19 +321,6 @@
         <span>Karin´s Medicinberegner</span>
     </h1>
 
-    <div class="installation">
-        <button class="install-button" id="installButton" type="button">Installér appen</button>
-        <details class="install-guide" id="installGuide">
-            <summary>Installér manuelt eller på iPhone/iPad</summary>
-            <div class="install-guide-content">
-                <p><strong>iPhone/iPad:</strong> Åbn siden i Safari, tryk på Del-knappen, vælg <em>Føj til hjemmeskærm</em>, og tryk på Tilføj.</p>
-                <p><strong>Android:</strong> Åbn siden i Chrome, og vælg <em>Installér appen</em>. Hvis valget ikke vises, åbn menuen ⋮ og vælg <em>Installér app</em> eller <em>Føj til startskærm</em>.</p>
-                <p><strong>Computer:</strong> Brug installationsikonet i adresselinjen eller vælg <em>Installér</em> i browsermenuen.</p>
-                <p>Hvis siden åbnes i Messenger, skal du først vælge at åbne den i Safari eller Chrome.</p>
-            </div>
-        </details>
-    </div>
-
     <label for="dosis">Ordineret dosis (mg)</label>
     <input type="number" id="dosis" inputmode="decimal" step="any" placeholder="fx 12">
 
@@ -356,6 +351,19 @@
         </span>
         <span class="fagligt-link-pil" aria-hidden="true">→</span>
     </a>
+
+    <div class="installation">
+        <button class="install-button" id="installButton" type="button">Installér appen</button>
+        <details class="install-guide" id="installGuide">
+            <summary>Installér manuelt eller på iPhone/iPad</summary>
+            <div class="install-guide-content">
+                <p><strong>iPhone/iPad:</strong> Åbn siden i Safari, tryk på Del-knappen, vælg <em>Føj til hjemmeskærm</em>, og tryk på Tilføj.</p>
+                <p><strong>Android:</strong> Åbn siden i Chrome, og vælg <em>Installér appen</em>. Hvis valget ikke vises, åbn menuen ⋮ og vælg <em>Installér app</em> eller <em>Føj til startskærm</em>.</p>
+                <p><strong>Computer:</strong> Brug installationsikonet i adresselinjen eller vælg <em>Installér</em> i browsermenuen.</p>
+                <p>Hvis siden åbnes i Messenger, skal du først vælge at åbne den i Safari eller Chrome.</p>
+            </div>
+        </details>
+    </div>
 
 </main>
 
