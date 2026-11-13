@@ -75,11 +75,26 @@
             margin-bottom: 4px;
         }
 
-        .version-number {
+        .version-stack {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
             margin-left: 3px;
+            line-height: 1.05;
+        }
+
+        .version-number,
+        .beta-label {
             color: #91a2b9;
-            font-size: clamp(0.55rem, 2.4vw, 0.72rem);
             font-weight: normal;
+        }
+
+        .version-number {
+            font-size: clamp(0.55rem, 2.4vw, 0.72rem);
+        }
+
+        .beta-label {
+            font-size: clamp(0.45rem, 1.8vw, 0.6rem);
         }
 
         .installation {
@@ -401,7 +416,10 @@
         </svg>
         <h1>
             <span>Karin´s MedicinBeregner</span>
-            <small class="version-number">v1.0.0</small>
+            <span class="version-stack">
+                <small class="version-number">v1.0.0</small>
+                <small class="beta-label">Beta version</small>
+            </span>
         </h1>
     </header>
 

@@ -79,7 +79,18 @@
             color: #91a2b9;
             font-size: 0.48em;
             font-weight: normal;
+        }
+
+        .version-stack {
+            display: inline-flex;
+            flex-direction: column;
             vertical-align: middle;
+            margin-left: 6px;
+            line-height: 1.05;
+        }
+
+        .version-stack .beta-label {
+            font-size: 0.7em;
         }
 
         h2 {
@@ -193,7 +204,7 @@
 <body>
     <main>
         <a class="back-link" href="./index.html">← Tilbage til beregneren</a>
-        <h1>Om app <small>v1.0.0</small></h1>
+        <h1>Om app <span class="version-stack"><small>v1.0.0</small><small class="beta-label">Beta version</small></span></h1>
 
         <section class="section-card" aria-labelledby="changes-heading">
             <h2 id="changes-heading">Seneste ændringer</h2>
