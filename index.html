@@ -331,6 +331,24 @@
             font-size: 14px;
         }
 
+        .result-warning {
+            margin: 12px 0 0;
+            padding: 10px 12px;
+            color: #ffe3a3;
+            background: rgba(224, 172, 58, 0.12);
+            border: 1px solid rgba(224, 172, 58, 0.4);
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.45;
+        }
+
+        .result-warning.critical {
+            color: #ffd2d2;
+            background: rgba(220, 53, 69, 0.15);
+            border-color: rgba(255, 111, 126, 0.55);
+        }
+
         .disclaimer {
             margin: -10px 0 20px;
             padding: 12px 14px;
@@ -448,6 +466,7 @@
     <div class="resultat">
         <p>Du skal trække op:</p>
         <div class="ml" id="resultat">- ml</div>
+        <p class="result-warning" id="resultatAdvarsel" role="alert" hidden></p>
         <p id="regnestykke"></p>
     </div>
 
@@ -517,7 +536,12 @@ function beregn() {
     let koncentrationVolumen = Number(document.getElementById("koncentrationVolumen").value);
 
     let resultat = document.getElementById("resultat");
+    let resultatAdvarsel = document.getElementById("resultatAdvarsel");
     let regnestykke = document.getElementById("regnestykke");
+
+    resultatAdvarsel.hidden = true;
+    resultatAdvarsel.classList.remove("critical");
+    resultatAdvarsel.innerText = "";
 
     if (koncentration === 0 || koncentrationVolumen === 0) {
         resultat.innerText = "Koncentration skal være over 0";
@@ -546,6 +570,21 @@ function beregn() {
     resultat.innerText =
         mlAfrundet.toLocaleString("da-DK") + " ml";
 
+    if (mlAfrundet < 0.1) {
+        resultatAdvarsel.innerText =
+            "⚠️ Resultatet er usædvanligt lavt. Er koncentrationen indtastet korrekt?";
+        resultatAdvarsel.hidden = false;
+    } else if (mlAfrundet > 20) {
+        resultatAdvarsel.innerText =
+            "⚠️ Kritisk advarsel: Resultatet er over 20 ml. Kontrollér ordination, koncentration og enheder før administration.";
+        resultatAdvarsel.classList.add("critical");
+        resultatAdvarsel.hidden = false;
+    } else if (mlAfrundet > 10) {
+        resultatAdvarsel.innerText =
+            "⚠️ Resultatet er usædvanligt højt. Er koncentrationen indtastet korrekt?";
+        resultatAdvarsel.hidden = false;
+    }
+
     regnestykke.innerText =
         dosis.toLocaleString("da-DK") +
         " mg ÷ " +
@@ -563,6 +602,10 @@ function nulstil() {
     document.getElementById("koncentration").value = "";
     document.getElementById("koncentrationVolumen").value = "1";
     document.getElementById("resultat").innerText = "- ml";
+    const resultatAdvarsel = document.getElementById("resultatAdvarsel");
+    resultatAdvarsel.innerText = "";
+    resultatAdvarsel.hidden = true;
+    resultatAdvarsel.classList.remove("critical");
     document.getElementById("regnestykke").innerText = "";
     document.getElementById("dosis").focus();
 }
