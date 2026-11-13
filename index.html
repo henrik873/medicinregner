@@ -93,32 +93,73 @@
             display: none;
         }
 
-        .install-guide {
-            margin-top: 8px;
-            color: #d6e0ef;
-            font-size: 14px;
-        }
-
-        .install-guide summary {
-            padding: 8px 0;
-            color: #b6c4d7;
-            cursor: pointer;
-        }
-
-        .install-guide-content {
-            padding: 12px;
+        .install-panel {
+            width: min(100%, 360px);
+            margin-top: 10px;
+            padding: 14px;
             background: rgba(5, 11, 20, 0.6);
             border: 1px solid rgba(176, 199, 230, 0.12);
             border-radius: 12px;
+            color: #d6e0ef;
+        }
+
+        .install-panel h2 {
+            margin: 0 0 12px;
+            color: #d6e0ef;
+            font-size: 15px;
+        }
+
+        .device-options {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .device-choice {
+            min-height: 40px;
+            padding: 8px;
+            color: #cbd8e8;
+            background: #263449;
+            font-size: 14px;
+        }
+
+        .device-choice[aria-pressed="true"] {
+            color: #fff;
+            background: #1677e8;
+        }
+
+        .install-instructions {
+            margin-top: 12px;
+            padding: 11px 12px;
+            background: rgba(176, 199, 230, 0.06);
+            border: 1px solid rgba(176, 199, 230, 0.12);
+            border-radius: 10px;
+            color: #cbd8e8;
+            font-size: 13px;
             line-height: 1.45;
         }
 
-        .install-guide-content p {
-            margin: 0 0 10px;
+        .install-instructions p {
+            margin: 0;
         }
 
-        .install-guide-content p:last-child {
-            margin-bottom: 0;
+        .install-now-button {
+            min-height: 40px;
+            margin-top: 10px;
+            padding: 8px 12px;
+            color: #fff;
+            background: #1677e8;
+            font-size: 14px;
+        }
+
+        .install-close {
+            min-height: 32px;
+            margin-top: 6px;
+            padding: 6px 8px;
+            color: #9eafc6;
+            background: transparent;
+            font-size: 13px;
+            font-weight: normal;
         }
 
         label {
@@ -372,16 +413,29 @@
     </a>
 
     <div class="installation">
-        <button class="install-button" id="installButton" type="button">Installér appen</button>
-        <details class="install-guide" id="installGuide">
-            <summary>Installér manuelt eller på iPhone/iPad</summary>
-            <div class="install-guide-content">
-                <p><strong>iPhone/iPad:</strong> Åbn siden i Safari, tryk på Del-knappen, vælg <em>Føj til hjemmeskærm</em>, og tryk på Tilføj.</p>
-                <p><strong>Android:</strong> Åbn siden i Chrome, og vælg <em>Installér appen</em>. Hvis valget ikke vises, åbn menuen ⋮ og vælg <em>Installér app</em> eller <em>Føj til startskærm</em>.</p>
-                <p><strong>Computer:</strong> Brug installationsikonet i adresselinjen eller vælg <em>Installér</em> i browsermenuen.</p>
-                <p>Hvis siden åbnes i Messenger, skal du først vælge at åbne den i Safari eller Chrome.</p>
+        <button class="install-button" id="installButton" type="button" aria-expanded="false" aria-controls="installPanel">Installér appen</button>
+        <section class="install-panel" id="installPanel" aria-labelledby="installHeading" hidden>
+            <h2 id="installHeading">Vælg enhed</h2>
+            <div class="device-options" role="group" aria-label="Vælg enhed">
+                <button class="device-choice" type="button" data-platform="pc" aria-pressed="false">PC</button>
+                <button class="device-choice" type="button" data-platform="iphone" aria-pressed="false">iPhone</button>
+                <button class="device-choice" type="button" data-platform="android" aria-pressed="false">Android</button>
             </div>
-        </details>
+            <div class="install-instructions" id="installInstructions" aria-live="polite">
+                <p id="installPlaceholder">Vælg din enhed ovenfor for at se instruktionerne.</p>
+                <div data-instructions="pc" hidden>
+                    <p>Åbn siden i Chrome eller Edge. Vælg installationsikonet i adresselinjen, eller åbn browsermenuen og vælg <strong>Installér app</strong>.</p>
+                </div>
+                <div data-instructions="iphone" hidden>
+                    <p>Åbn siden i Safari, tryk på <strong>Del</strong>, vælg <strong>Føj til hjemmeskærm</strong>, og tryk på <strong>Tilføj</strong>. Hvis siden er åbnet i Messenger, åbn den først i Safari.</p>
+                </div>
+                <div data-instructions="android" hidden>
+                    <p>Åbn siden i Chrome, og vælg <strong>Installér app</strong>. Hvis valget ikke vises, åbn menuen ⋮ og vælg <strong>Installér app</strong> eller <strong>Føj til startskærm</strong>.</p>
+                </div>
+            </div>
+            <button class="install-now-button" id="installNowButton" type="button" hidden>Installér nu</button>
+            <button class="install-close" id="closeInstallPanel" type="button">Luk vejledning</button>
+        </section>
     </div>
 
 </main>
@@ -446,8 +500,12 @@ function nulstil() {
 }
 
 const installButton = document.getElementById("installButton");
-const installGuide = document.getElementById("installGuide");
+const installPanel = document.getElementById("installPanel");
+const installNowButton = document.getElementById("installNowButton");
+const installInstructions = document.getElementById("installInstructions");
+const installPlaceholder = document.getElementById("installPlaceholder");
 let deferredInstallPrompt = null;
+let selectedPlatform = null;
 
 if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true) {
     installButton.hidden = true;
@@ -456,36 +514,63 @@ if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.
 window.addEventListener("beforeinstallprompt", event => {
     event.preventDefault();
     deferredInstallPrompt = event;
+    installNowButton.hidden = selectedPlatform !== "pc" && selectedPlatform !== "android";
 });
 
-installButton.addEventListener("click", async () => {
+installButton.addEventListener("click", () => {
+    installPanel.hidden = !installPanel.hidden;
+    installButton.setAttribute("aria-expanded", String(!installPanel.hidden));
+    if (!installPanel.hidden) {
+        installPanel.querySelector(".device-choice").focus();
+    }
+});
+
+document.querySelectorAll(".device-choice").forEach(button => {
+    button.addEventListener("click", () => {
+        selectedPlatform = button.dataset.platform;
+        document.querySelectorAll(".device-choice").forEach(choice => {
+            choice.setAttribute("aria-pressed", String(choice === button));
+        });
+        installPlaceholder.hidden = true;
+        installInstructions.querySelectorAll("[data-instructions]").forEach(instructions => {
+            instructions.hidden = instructions.dataset.instructions !== selectedPlatform;
+        });
+        installNowButton.hidden = !deferredInstallPrompt || (selectedPlatform !== "pc" && selectedPlatform !== "android");
+    });
+});
+
+document.getElementById("closeInstallPanel").addEventListener("click", () => {
+    installPanel.hidden = true;
+    installButton.setAttribute("aria-expanded", "false");
+    installButton.focus();
+});
+
+installNowButton.addEventListener("click", async () => {
     if (!deferredInstallPrompt) {
-        installGuide.open = true;
-        installGuide.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        installGuide.querySelector("summary").focus();
         return;
     }
 
     const installPrompt = deferredInstallPrompt;
     deferredInstallPrompt = null;
+    installNowButton.hidden = true;
 
     try {
         await installPrompt.prompt();
         const { outcome } = await installPrompt.userChoice;
         if (outcome === "accepted") {
             installButton.hidden = true;
-        } else {
-            installGuide.open = true;
+            installPanel.hidden = true;
         }
     } catch (error) {
         console.error("Installationsprompten kunne ikke åbnes:", error);
-        installGuide.open = true;
+        installNowButton.hidden = true;
     }
 });
 
 window.addEventListener("appinstalled", () => {
     deferredInstallPrompt = null;
     installButton.hidden = true;
+    installPanel.hidden = true;
 });
 
 </script>
