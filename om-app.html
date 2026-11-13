@@ -118,6 +118,75 @@
         .section-card li + li {
             margin-top: 8px;
         }
+
+        .email-form {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .email-form label {
+            color: #d0dbea;
+            font-weight: bold;
+        }
+
+        .email-form input[type="email"] {
+            width: 100%;
+            min-height: 46px;
+            padding: 11px 12px;
+            color: #e8eef8;
+            background: #0d1420;
+            border: 1px solid rgba(176, 199, 230, 0.28);
+            border-radius: 10px;
+            font: inherit;
+        }
+
+        .email-form input[type="email"]:focus-visible,
+        .email-form input[type="checkbox"]:focus-visible,
+        .email-form button:focus-visible,
+        .email-form a:focus-visible {
+            outline: 3px solid #b6d7ff;
+            outline-offset: 3px;
+        }
+
+        .consent-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: 14px;
+            font-weight: normal !important;
+            line-height: 1.5;
+        }
+
+        .consent-label input {
+            flex: 0 0 auto;
+            width: 18px;
+            height: 18px;
+            margin: 1px 0 0;
+            accent-color: #1677e8;
+        }
+
+        .email-form button {
+            min-height: 44px;
+            padding: 10px 16px;
+            color: #fff;
+            background: #1677e8;
+            border: 0;
+            border-radius: 10px;
+            font: inherit;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .email-form button:hover {
+            background: #0d64c7;
+        }
+
+        .email-note {
+            margin-top: 12px !important;
+            color: #a9bad0 !important;
+            font-size: 13px;
+        }
     </style>
 </head>
 
@@ -138,8 +207,28 @@
 
         <section class="section-card" aria-labelledby="notifications-heading">
             <h2 id="notifications-heading">Email om nye versioner</h2>
-            <p>Email-tilmelding er ikke aktiveret endnu. Den kommer, når der er valgt en løsning, som kan gemme tilmeldinger og håndtere udsendelser.</p>
+            <p>Indtast din emailadresse for at bede om besked, når der kommer en ny version. Dit mailprogram åbner en besked til Henrik, som du selv skal sende.</p>
+            <form class="email-form" id="emailSubscriptionForm">
+                <label for="subscriberEmail">Emailadresse</label>
+                <input id="subscriberEmail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="navn@eksempel.dk" required>
+                <label class="consent-label" for="emailConsent">
+                    <input id="emailConsent" name="consent" type="checkbox" required>
+                    <span>Jeg giver samtykke til, at Henrik modtager min emailadresse og bruger den til at sende besked om nye versioner af appen.</span>
+                </label>
+                <button type="submit">Send tilmelding</button>
+            </form>
+            <p class="email-note">Appen gemmer ikke emailadresser. Tilmeldingen sendes først, når du trykker “Send” i dit mailprogram. Kan mailprogrammet ikke åbnes, kan du skrive til <a href="mailto:Henrik@holm5.dk">Henrik@holm5.dk</a>.</p>
         </section>
     </main>
+    <script>
+        document.getElementById("emailSubscriptionForm").addEventListener("submit", event => {
+            event.preventDefault();
+
+            const email = document.getElementById("subscriberEmail").value.trim();
+            const subject = "Tilmelding til nyt om Karin´s MedicinBeregner";
+            const body = `Jeg ønsker besked om nye versioner af appen.\n\nEmailadresse: ${email}`;
+            window.location.href = `mailto:Henrik@holm5.dk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+    </script>
 </body>
 </html>
